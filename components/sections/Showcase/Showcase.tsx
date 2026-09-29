@@ -1,8 +1,25 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { SiteImage } from "@/components/ui/SiteImage";
+import { SiteVideo } from "@/components/ui/SiteVideo";
 import { useLocale } from "@/context/LocaleContext";
+import { showcaseTrack, type ShowcaseTrackItem } from "@/data/media";
 import { sectionIds } from "@/data/site";
+
+const panelLabel = (
+  item: ShowcaseTrackItem,
+  panels: {
+    number: string;
+    label: string;
+    detail: string;
+  }[],
+): { number: string; label: string; detail: string } | null => {
+  if (item.kind === "word") {
+    return null;
+  }
+  return panels[item.panelIndex];
+};
 
 export const Showcase = (): React.ReactElement => {
   const { dictionary } = useLocale();
@@ -65,7 +82,8 @@ export const Showcase = (): React.ReactElement => {
 
     const move = (x: number): void => {
       const rect = ba.getBoundingClientRect();
-      const percent = Math.min(1, Math.max(0, (x - rect.left) / rect.width)) * 100;
+      const percent =
+        Math.min(1, Math.max(0, (x - rect.left) / rect.width)) * 100;
       after.style.clipPath = `inset(0 0 0 ${percent}%)`;
       bar.style.left = `${percent}%`;
     };
@@ -85,72 +103,90 @@ export const Showcase = (): React.ReactElement => {
     };
   }, []);
 
-  const [p1, p2, p3, p4] = dictionary.showcase.panels;
+  const panels = dictionary.showcase.panels;
 
   return (
     <section className="show" id={sectionIds.work} ref={showRef}>
       <div className="stick">
         <div className="track" id="track" ref={trackRef}>
-          <div className="pn" style={{ width: "38vw" }}>
-            <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" fill="none" stroke="#F4F4F2" strokeWidth=".8" aria-hidden="true">
-              <path d="M-20 220 C60 150 200 120 420 190" strokeOpacity=".6" />
-              <path d="M-20 240 C80 170 220 145 420 215" strokeOpacity=".3" />
-              <path d="M-20 260 C100 200 240 170 420 240" strokeOpacity=".15" />
-            </svg>
-            <div className="fx" aria-hidden="true" />
-            <div className="lb">
-              <em>{p1.number}</em>
-              {p1.label}
-              <em>{p1.detail}</em>
-            </div>
-          </div>
+          {showcaseTrack.map((item, index) => {
+            if (item.kind === "word") {
+              const className =
+                item.textKey === "wordDepth" ? "big h depth-word" : "big h";
+              return (
+                <div key={`${item.textKey}-${index}`} className={className} aria-hidden="true">
+                  {dictionary.showcase[item.textKey]}
+                </div>
+              );
+            }
 
-          <div className="big h" aria-hidden="true">
-            {dictionary.showcase.wordFinish}
-          </div>
+            const lb = panelLabel(item, panels);
 
-          <div className="pn ba" id="ba" ref={baRef} style={{ width: "46vw" }}>
-            <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" fill="none" stroke="#F4F4F2" strokeWidth=".8" aria-hidden="true">
-              <circle cx="200" cy="150" r="90" strokeOpacity=".4" />
-              <circle cx="200" cy="150" r="60" strokeOpacity=".25" />
-              <circle cx="200" cy="150" r="20" strokeOpacity=".5" />
-            </svg>
-            <div className="after" aria-hidden="true" />
-            <div className="bar" aria-hidden="true" />
-            <div className="lb">
-              <em>{p2.number}</em>
-              {p2.label}
-              <em>{p2.detail}</em>
-            </div>
-          </div>
+            if (item.kind === "beforeAfter") {
+              return (
+                <div
+                  key={`ba-${index}`}
+                  className="pn ba"
+                  id="ba"
+                  ref={baRef}
+                  style={{ width: item.width }}
+                >
+                  <div className="ba-base">
+                    <SiteImage
+                      src={item.before}
+                      alt={dictionary.media.beforeAfter}
+                      sizes="46vw"
+                    />
+                  </div>
+                  <div className="after">
+                    <SiteImage
+                      src={item.after}
+                      alt=""
+                      sizes="46vw"
+                    />
+                  </div>
+                  <div className="bar" aria-hidden="true" />
+                  {lb ? (
+                    <div className="lb">
+                      <em>{lb.number}</em>
+                      {lb.label}
+                      <em>{lb.detail}</em>
+                    </div>
+                  ) : null}
+                </div>
+              );
+            }
 
-          <div className="pn" style={{ width: "30vw" }}>
-            <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice" fill="none" stroke="#F4F4F2" strokeWidth=".8" aria-hidden="true">
-              <path d="M40 400 L260 0M90 400 L310 0M140 400 L360 0" strokeOpacity=".2" />
-            </svg>
-            <div className="fx" aria-hidden="true" />
-            <div className="lb">
-              <em>{p3.number}</em>
-              {p3.label}
-              <em>{p3.detail}</em>
-            </div>
-          </div>
+            const alt = lb
+              ? `${lb.label} — ${lb.detail}`
+              : dictionary.media.peek;
+            const heightClass =
+              item.kind === "image" || item.kind === "video"
+                ? item.heightClass ?? ""
+                : "";
 
-          <div className="pn" style={{ width: "34vw" }}>
-            <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" fill="none" stroke="#F4F4F2" strokeWidth=".8" aria-hidden="true">
-              <path d="M0 200 L400 120M0 216 L400 136" strokeOpacity=".3" />
-            </svg>
-            <div className="fx" aria-hidden="true" />
-            <div className="lb">
-              <em>{p4.number}</em>
-              {p4.label}
-              <em>{p4.detail}</em>
-            </div>
-          </div>
-
-          <div className="big h depth-word" aria-hidden="true">
-            {dictionary.showcase.wordDepth}
-          </div>
+            return (
+              <div
+                key={`${item.kind}-${index}`}
+                className={`pn ${heightClass}`.trim()}
+                style={{ width: item.width }}
+              >
+                {item.kind === "video" ? (
+                  <SiteVideo src={item.src} poster={item.poster} />
+                ) : (
+                  <SiteImage src={item.src} alt={alt} sizes={item.width} />
+                )}
+                <div className="fx" aria-hidden="true" />
+                {lb ? (
+                  <div className="lb">
+                    <em>{lb.number}</em>
+                    {lb.label}
+                    <em>{lb.detail}</em>
+                  </div>
+                ) : null}
+              </div>
+            );
+          })}
         </div>
         <div className="prog">
           <i id="pg" ref={progRef} />

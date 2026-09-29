@@ -12,8 +12,6 @@ import { ServiceArea } from "@/components/sections/ServiceArea/ServiceArea";
 import { Services } from "@/components/sections/Services/Services";
 import { Showcase } from "@/components/sections/Showcase/Showcase";
 import { Testimonials } from "@/components/sections/Testimonials/Testimonials";
-import { LocaleSwitcher } from "@/components/ui/LocaleSwitcher";
-
 export const HomePage = (): React.ReactElement => {
   const { dir } = useLocale();
 
@@ -25,7 +23,6 @@ export const HomePage = (): React.ReactElement => {
   return (
     <>
       <Nav />
-      <LocaleSwitcher />
       <main>
         <Hero />
         <Services />

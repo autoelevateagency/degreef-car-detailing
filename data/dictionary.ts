@@ -46,6 +46,8 @@ export type Dictionary = {
       cite: string;
     }[];
     ariaLabel: string;
+    prevLabel: string;
+    nextLabel: string;
   };
   about: {
     line1: string;
@@ -82,6 +84,7 @@ export type Dictionary = {
   finalCta: {
     line1: string;
     line2: string;
+    line3: string;
     cta: string;
   };
   footer: {
@@ -94,6 +97,15 @@ export type Dictionary = {
     tiktok: string;
     copyright: string;
     legal: string;
+  };
+  media: {
+    hero: string;
+    about: string;
+    contact: string;
+    finalCta: string;
+    serviceArea: string;
+    peek: string;
+    beforeAfter: string;
   };
 };
 
@@ -166,6 +178,8 @@ const en: Dictionary = {
       },
     ],
     ariaLabel: "Testimonial",
+    prevLabel: "Previous testimonial",
+    nextLabel: "Next testimonial",
   },
   about: {
     line1: "Detailing",
@@ -183,9 +197,9 @@ const en: Dictionary = {
     line1: "We come",
     line2: "to you.",
     items: [
-      { label: "Coverage", value: "Service area" },
-      { label: "Format", value: "Mobile service" },
-      { label: "Setup", value: "On-site detailing" },
+      { label: "Coverage", value: "Brussels + 40 km" },
+      { label: "Format", value: "Fully mobile unit" },
+      { label: "Setup", value: "Driveway or garage" },
     ],
   },
   contact: {
@@ -197,25 +211,35 @@ const en: Dictionary = {
     phone: "Phone",
     email: "Email",
     serviceArea: "Service area",
-    serviceAreaValue: "Your city and surroundings",
+    serviceAreaValue: "Brussels and surrounding areas",
     hours: "Opening hours",
     hoursValue: "Mon–Sat, 08:00–18:00",
   },
   finalCta: {
     line1: "Your car.",
-    line2: "Our standard.",
+    line2: "Our",
+    line3: "standard.",
     cta: "Book your detail",
   },
   footer: {
     navigate: "Navigate",
     contact: "Contact",
     area: "Area",
-    areaValue: "Mobile — we come to you",
+    areaValue: "Belgium — we come to you",
     follow: "Follow",
     instagram: "Instagram",
     tiktok: "TikTok",
     copyright: "© 2026 DEGREEF Mobile Car Detailing",
     legal: "Privacy · Terms",
+  },
+  media: {
+    hero: "Mobile detailing in progress on a vehicle",
+    about: "Close-up of paint and surface finish work",
+    contact: "Finished vehicle after detailing",
+    finalCta: "Detailing result on a performance car",
+    serviceArea: "Mobile detailing at the customer's location",
+    peek: "Preview of detailing work",
+    beforeAfter: "Paint correction before and after comparison",
   },
 };
 
@@ -288,6 +312,8 @@ const ur: Dictionary = {
       },
     ],
     ariaLabel: "تعریف",
+    prevLabel: "پچھلی تعریف",
+    nextLabel: "اگلی تعریف",
   },
   about: {
     line1: "ڈیٹیلنگ",
@@ -305,9 +331,9 @@ const ur: Dictionary = {
     line1: "ہم آتے ہیں",
     line2: "آپ کے پاس۔",
     items: [
-      { label: "کوریج", value: "سروس ایریا" },
-      { label: "فارمیٹ", value: "موبائل سروس" },
-      { label: "سیٹ اپ", value: "آن سائٹ ڈیٹیلنگ" },
+      { label: "کوریج", value: "برسلز + 40 کلومیٹر" },
+      { label: "فارمیٹ", value: "مکمل موبائل یونٹ" },
+      { label: "سیٹ اپ", value: "ڈرائیو وے یا گیراج" },
     ],
   },
   contact: {
@@ -319,25 +345,35 @@ const ur: Dictionary = {
     phone: "فون",
     email: "ای میل",
     serviceArea: "سروس ایریا",
-    serviceAreaValue: "آپ کا شہر اور گرد و نواح",
+    serviceAreaValue: "برسلز اور گرد و نواح",
     hours: "اوقات کار",
     hoursValue: "پیر–ہفتہ، 08:00–18:00",
   },
   finalCta: {
     line1: "آپ کی کار۔",
-    line2: "ہمارا معیار۔",
+    line2: "ہمارا",
+    line3: "معیار۔",
     cta: "اپنی ڈیٹیل بک کریں",
   },
   footer: {
     navigate: "نیویگیٹ",
     contact: "رابطہ",
     area: "علاقہ",
-    areaValue: "موبائل — ہم آپ کے پاس آتے ہیں",
+    areaValue: "بیلجیم — ہم آپ کے پاس آتے ہیں",
     follow: "فالو کریں",
     instagram: "Instagram",
     tiktok: "TikTok",
     copyright: "© 2026 DEGREEF موبائل کار ڈیٹیلنگ",
     legal: "پرائیویسی · شرائط",
+  },
+  media: {
+    hero: "گاڑی پر موبائل ڈیٹیلنگ کا کام",
+    about: "پینٹ اور سطح کی فنش کا قریبی منظر",
+    contact: "ڈیٹیلنگ کے بعد تیار گاڑی",
+    finalCta: "پرفارمنس کار پر ڈیٹیلنگ کا نتیجہ",
+    serviceArea: "گاہک کے مقام پر موبائل ڈیٹیلنگ",
+    peek: "ڈیٹیلنگ کام کا پیش نظارہ",
+    beforeAfter: "پینٹ کریکشن پہلے اور بعد کا موازنہ",
   },
 };
 

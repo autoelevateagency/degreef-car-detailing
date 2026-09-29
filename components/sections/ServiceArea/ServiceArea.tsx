@@ -2,7 +2,9 @@
 
 import { Reveal } from "@/components/ui/Reveal";
 import { MaskLine } from "@/components/ui/MaskLine";
+import { SiteImage } from "@/components/ui/SiteImage";
 import { useLocale } from "@/context/LocaleContext";
+import { siteMedia } from "@/data/media";
 import { sectionIds } from "@/data/site";
 
 export const ServiceArea = (): React.ReactElement => {
@@ -10,6 +12,13 @@ export const ServiceArea = (): React.ReactElement => {
 
   return (
     <Reveal as="section" className="mob" id={sectionIds.area}>
+      <div className="mob-media" aria-hidden="true">
+        <SiteImage
+          src={siteMedia.serviceArea}
+          alt={dictionary.media.serviceArea}
+          sizes="100vw"
+        />
+      </div>
       <svg
         className="map"
         viewBox="0 0 1200 700"

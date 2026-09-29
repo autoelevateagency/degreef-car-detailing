@@ -1,11 +1,12 @@
 export const siteLinks = {
-  bookingEmail: "mailto:book@degreef.example",
-  phoneTel: "tel:+000000000",
-  phoneDisplay: "+00 000 000 000",
-  emailMailto: "mailto:hello@degreef.example",
-  emailDisplay: "hello@degreef.example",
-  instagram: "#",
-  tiktok: "#",
+  bookingEmail:
+    "mailto:book@degreef.be?subject=DEGREEF%20Booking%20Request",
+  phoneTel: "tel:+32468358351",
+  phoneDisplay: "+32 468 35 83 51",
+  emailMailto: "mailto:hello@degreef.be",
+  emailDisplay: "hello@degreef.be",
+  instagram: "https://www.instagram.com/degreef_detailing/",
+  tiktok: "https://tiktok.com/@degreef",
 } as const;
 
 export const sectionIds = {

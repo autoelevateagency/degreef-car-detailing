@@ -13,6 +13,10 @@ const archivo = Archivo({
 export const metadata: Metadata = {
   title: "DEGREEF Mobile Car Detailing",
   description: "Studio-grade mobile car detailing, delivered to your driveway.",
+  icons: {
+    icon: [{ url: "/icon.png", type: "image/png" }],
+    apple: [{ url: "/apple-icon.png", type: "image/png" }],
+  },
 };
 
 const RootLayout = ({

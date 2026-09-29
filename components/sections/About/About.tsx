@@ -2,7 +2,9 @@
 
 import { Reveal } from "@/components/ui/Reveal";
 import { MaskLine, Stripes } from "@/components/ui/MaskLine";
+import { SiteImage } from "@/components/ui/SiteImage";
 import { useLocale } from "@/context/LocaleContext";
+import { siteMedia } from "@/data/media";
 import { sectionIds } from "@/data/site";
 
 export const About = (): React.ReactElement => {
@@ -16,12 +18,11 @@ export const About = (): React.ReactElement => {
         <MaskLine>{dictionary.about.line3}</MaskLine>
       </h2>
       <div className="vis grain">
-        <svg viewBox="0 0 300 400" fill="none" stroke="#F4F4F2" strokeWidth=".6" aria-hidden="true">
-          <circle cx="150" cy="210" r="110" strokeOpacity=".35" />
-          <circle cx="150" cy="210" r="70" strokeOpacity=".25" />
-          <circle cx="150" cy="210" r="14" strokeOpacity=".6" />
-          <path d="M0 330H300" strokeOpacity=".2" />
-        </svg>
+        <SiteImage
+          src={siteMedia.about}
+          alt={dictionary.media.about}
+          sizes="(max-width: 820px) 78vw, 40vw"
+        />
       </div>
       <div className="txt">
         <strong>{dictionary.about.lead}</strong>

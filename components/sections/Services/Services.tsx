@@ -2,18 +2,13 @@
 
 import { useEffect, useRef } from "react";
 import { useLocale } from "@/context/LocaleContext";
+import { siteMedia } from "@/data/media";
 import { sectionIds } from "@/data/site";
-
-const peekShapes = [
-  '<path d="M-5 80 C30 40 70 30 105 60" /><path d="M-5 92 C30 52 70 42 105 72" stroke-opacity=".5"/>',
-  '<circle cx="50" cy="62" r="34"/><circle cx="50" cy="62" r="22" stroke-opacity=".5"/><circle cx="50" cy="62" r="6"/>',
-  '<path d="M10 125L70 0M30 125L90 0M50 125L110 0" stroke-opacity=".6"/>',
-];
 
 export const Services = (): React.ReactElement => {
   const { dictionary } = useLocale();
   const peekRef = useRef<HTMLDivElement | null>(null);
-  const shapeRef = useRef<SVGGElement | null>(null);
+  const peekImgRef = useRef<HTMLImageElement | null>(null);
   const pointer = useRef({ mx: 0, my: 0, cx: 0, cy: 0, run: false });
 
   useEffect(() => {
@@ -22,8 +17,8 @@ export const Services = (): React.ReactElement => {
     }
 
     const peek = peekRef.current;
-    const shape = shapeRef.current;
-    if (!peek || !shape) {
+    const peekImg = peekImgRef.current;
+    if (!peek || !peekImg) {
       return;
     }
 
@@ -43,7 +38,8 @@ export const Services = (): React.ReactElement => {
     const cleanups = rows.map((row) => {
       const onEnter = (): void => {
         const index = Number(row.dataset.p ?? 0);
-        shape.innerHTML = peekShapes[index] ?? peekShapes[0];
+        peekImg.src =
+          siteMedia.servicesPeek[index] ?? siteMedia.servicesPeek[0];
         peek.classList.add("on");
         if (!pointer.current.run) {
           pointer.current.run = true;
@@ -94,9 +90,13 @@ export const Services = (): React.ReactElement => {
         ))}
       </section>
       <div id="peek" ref={peekRef} aria-hidden="true">
-        <svg viewBox="0 0 100 125" fill="none" stroke="#F4F4F2" strokeWidth=".4">
-          <g ref={shapeRef} id="pk" />
-        </svg>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          ref={peekImgRef}
+          className="peek-img"
+          src={siteMedia.servicesPeek[0]}
+          alt=""
+        />
       </div>
     </>
   );
